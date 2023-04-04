@@ -1,23 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import MainBox from "./components/MainBox";
+import "./App.css";
+import React, { useState } from "react";
+import SecondBox from "./components/SecondBox";
 
 function App() {
+  const [view, setView] = useState("view1");
+  const [rating, setRating] = useState(0);
+
+  const clickView = (view) => {
+    setView(view);
+  };
+
+  const clickRating = (rate) => {
+    setRating(rate);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {view === "view1" ? (
+        <MainBox
+          clickView={clickView}
+          clickRating={clickRating}
+          rating={rating}
+        />
+      ) : (
+        <SecondBox rating={rating} />
+      )}
     </div>
   );
 }
